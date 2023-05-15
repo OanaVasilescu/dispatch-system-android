@@ -45,13 +45,11 @@ public class ConnectedThread  extends Thread{
 
         byte[] buffer = new byte[1024];
         int bytes = 0; // bytes returned from read()
-        int numberOfReadings = 0; //to control the number of readings from the Arduino
 
         // Keep listening to the InputStream until an exception occurs.
         //We just want to get 1 temperature readings from the Arduino
-        while (numberOfReadings < 1) {
+        while (true) {
             try {
-
                 buffer[bytes] = (byte) mmInStream.read();
                 String readMessage;
                 // If I detect a "\n" means I already read a full measurement
@@ -61,7 +59,6 @@ public class ConnectedThread  extends Thread{
                     //Value to be read by the Observer streamed by the Obervable
                     valueRead=readMessage;
                     bytes = 0;
-                    numberOfReadings++;
                 } else {
                     bytes++;
                 }
