@@ -2,11 +2,35 @@
     <string name="app_name">Dispatch System</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="log_in">Log in</string>
+    <string name="password">Password</string>
+    <string name="e_mail">E-mail</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="retype_password">Retype password</string>
+    <string name="age">Age</string>
+    <string name="cnp">CNP</string>
+    <string name="select_sex">Select Sex</string>
+    <string name="select_blood_group">Select blood group</string>
+    <string name="register">Register</string>
+    <string name="not_a_member_click_here_to_sign_up">Not a member? Click <b>here</b> to sign up.
+    </string>
+    <string name="donor_form">Donor Form</string>
+    <string name="log_out">Log Out</string>
+    <string name="donation_info">Donation Info</string>
+    <string name="appointment">Appointment</string>
+    <string name="donor_profile">Donor Profile</string>
+    <string name="select_appointment_time">Select appointment time:</string>
+    <string name="_8">8</string>
+    <string name="_00">00</string>
+    <string name="make_appointment">Make Appointment</string>
+    <string name="scan_qr_code">Scan QR code</string>
+    <string name="donor_name">Donor name:</string>
+    <string name="blood_group">Blood group</string>
+    <string name="log_in_admin">admin</string>
+    <string name="sex">Sex</string>
+    <string name="blood_group_">Blood group:</string>
+    <string name="fisrt_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="qr_code">QR Code</string>
 </resources>

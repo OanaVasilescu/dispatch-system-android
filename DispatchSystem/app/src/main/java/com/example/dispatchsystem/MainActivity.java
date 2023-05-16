@@ -1,12 +1,9 @@
 package com.example.dispatchsystem;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
-import android.bluetooth.BluetoothSocket;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -14,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,9 +20,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+
 import java.util.Set;
 import java.util.UUID;
 
@@ -69,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         //Intances of BT Manager and BT Adapter needed to work with BT in Android.
         BluetoothManager bluetoothManager = getSystemService(BluetoothManager.class);
@@ -251,5 +246,17 @@ public class MainActivity extends AppCompatActivity {
             );
         }
     }
+
+
+
+//        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+//        Handler handler = new Handler(Looper.getMainLooper());
+//
+//        service.scheduleAtFixedRate(() -> {
+//            handler.post(() -> {
+//                // Do your stuff here, It gets loop every 15 Minutes
+//            });
+//        }, 0, 15, TimeUnit.MINUTES);
+
 
 }
