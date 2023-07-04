@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.dispatchsystem.api.RetrofitClient;
+import com.example.dispatchsystem.model.Credentials;
 import com.example.dispatchsystem.model.Globals;
 import com.example.dispatchsystem.model.User;
 import retrofit2.Call;
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if(!errorFlag) {
-            User user = new User();
+            Credentials user = new Credentials();
             user.setEmail(emailText.getText().toString()); // check
             user.setPassword(passwordText.getText().toString());
             //Log.e("Chestie", emailText.toString() );
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void makeLoginCall(User user) {
+    private void makeLoginCall(Credentials user) {
         Call<User> call = RetrofitClient
                 .getInstance()
                 .getAPI()

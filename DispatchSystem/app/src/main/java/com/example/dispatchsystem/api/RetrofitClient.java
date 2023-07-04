@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static final String BASE_URL = "https://dispatch-app.herokuapp.com/";
+    private static final String BASE_URL = "https://9da01187trial-dev-dispatch-system-cap-srv.cfapps.us10-001.hana.ondemand.com/app/";
     //private static final String BASE_URL = " http://110.0.2.2:8080/";
     private static RetrofitClient mInstance;
     private Retrofit retrofit;

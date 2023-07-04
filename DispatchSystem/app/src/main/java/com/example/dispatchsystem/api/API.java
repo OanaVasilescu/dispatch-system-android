@@ -1,11 +1,14 @@
 package com.example.dispatchsystem.api;
 
 import com.example.dispatchsystem.model.ArduinoData;
+import com.example.dispatchsystem.model.Credentials;
 import com.example.dispatchsystem.model.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 
 public interface API {
@@ -14,12 +17,13 @@ public interface API {
             @Body ArduinoData data
     );
 
-    @POST("user/login")
+    @POST("login")
     Call<User> checkUser (
-            @Body User user
+            @Body Credentials credentials
     );
 
-    @POST("user")
+
+    @POST("register")
     Call<ResponseBody> createUser(
             @Body User user
     );
