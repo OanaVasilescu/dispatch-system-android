@@ -33,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -253,39 +254,48 @@ public class MainActivity extends AppCompatActivity {
         public void onScanResult(int callbackType, ScanResult result) {
             Button connectToDevice = (Button) findViewById(R.id.connectToDevice);
             TextView btDevices = findViewById(R.id.btDevices);
-
             Log.e("tag", "Device Name: " + result.getDevice().getName() + " rssi: " + result.getRssi() + "\n");
 
+            try {
+               if( createBond(result.getDevice())){
+                   String deviceName = result.getDevice().getName();
+                   String deviceHardwareAddress = result.getDevice().getAddress(); // MAC address
+                   Log.d(TAG, "deviceName:" + deviceName);
 
-            String deviceName = result.getDevice().getName();
-            String deviceHardwareAddress = result.getDevice().getAddress(); // MAC address
-            Log.d(TAG, "deviceName:" + deviceName);
-
-            if (deviceName != null) {
-                Log.d(TAG, "deviceHardwareAddress:" + deviceHardwareAddress);
-                //We append all devices to a String that we will display in the UI
+                   if (deviceName != null) {
+                       Log.d(TAG, "deviceHardwareAddress:" + deviceHardwareAddress);
+                       //We append all devices to a String that we will display in the UI
 //                btDevicesString = btDevicesString + deviceName + " || " + deviceHardwareAddress + "\n";
-                //If we find the HC 05 device (the Arduino BT module)
-                //We assign the device value to the Global variable BluetoothDevice
-                //We enable the button "Connect to HC 05 device"
-                if (deviceName.equals("MLT-BT05")) {
-                    Log.d(TAG, "MLT-BT05 found");
+                       //If we find the HC 05 device (the Arduino BT module)
+                       //We assign the device value to the Global variable BluetoothDevice
+                       //We enable the button "Connect to HC 05 device"
+                       if (deviceName.equals("MLT-BT05")) {
+                           Log.d(TAG, "MLT-BT05 found");
 //                    arduinoUUID = fromString(getUUID(result));
 
 //                    List<ParcelUuid> uuids = result.getScanRecord().getServiceUuids();
 //                    arduinoUUID = uuids.get(0).getUuid();
-//                    Log.e(TAG, getUUID(result));
+                           Log.e(TAG, getUUID(result));
 
-                    arduinoBTModule = result.getDevice();
-                    //HC -05 Found, enabling the button to read results
+                           arduinoBTModule = result.getDevice();
+                           //HC -05 Found, enabling the button to read results
 
 
-                    connectToDevice.setEnabled(true);
-                    stopScanning();
-                    btDevices.setText("MLT-BT05 found");
-                }
+                           connectToDevice.setEnabled(true);
+                           stopScanning();
+                           btDevices.setText("MLT-BT05 found");
+                       }
 
+                   }
+               } else {
+                   btDevices.setText("MLT-BT05 could not be paired");
+               }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
+
         }
     };
 
@@ -320,14 +330,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-//        Handler handler = new Handler(Looper.getMainLooper());
-//
-//        service.scheduleAtFixedRate(() -> {
-//            handler.post(() -> {
-//                // Do your stuff here, It gets loop every 15 Minutes
-//            });
-//        }, 0, 15, TimeUnit.MINUTES);
-
-
+    public boolean createBond(BluetoothDevice btDevice)
+            throws Exception
+    {
+        Class class1 = Class.forName("android.bluetooth.BluetoothDevice");
+        Method createBondMethod = class1.getMethod("createBond");
+        Boolean returnValue = (Boolean) createBondMethod.invoke(btDevice);
+        return returnValue.booleanValue();
+    }
 }
