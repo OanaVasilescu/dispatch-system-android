@@ -258,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                if( createBond(result.getDevice())){
+                   Log.e(TAG, "created bond");
                    String deviceName = result.getDevice().getName();
                    String deviceHardwareAddress = result.getDevice().getAddress(); // MAC address
                    Log.d(TAG, "deviceName:" + deviceName);

@@ -1,11 +1,24 @@
 package com.example.dispatchsystem;
 
 import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.example.dispatchsystem.api.RetrofitClient;
+import com.example.dispatchsystem.model.ArduinoData;
+import com.example.dispatchsystem.model.Credentials;
+import com.example.dispatchsystem.model.Globals;
+import com.example.dispatchsystem.model.User;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ConnectedThread  extends Thread{
     private static final String TAG = "FrugalLogs";
@@ -59,6 +72,11 @@ public class ConnectedThread  extends Thread{
                     //Value to be read by the Observer streamed by the Obervable
                     valueRead=readMessage;
                     bytes = 0;
+
+                    ArduinoData arduinoData = new ArduinoData();
+                    arduinoData.setData(valueRead);
+                    arduinoData.setUserId(Globals.currentUser.getId().toString());
+                    makeCall(arduinoData);
                 } else {
                     bytes++;
                 }
@@ -78,5 +96,26 @@ public class ConnectedThread  extends Thread{
         } catch (IOException e) {
             Log.e(TAG, "Could not close the connect socket", e);
         }
+    }
+
+
+
+    private void makeCall (ArduinoData arduinoData){
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getAPI()
+                .arduinoData(arduinoData);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Boolean success;
+                success = response.isSuccessful();
+                int requestCode = response.code();
+
+            }
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("failure: " + t.getMessage());
+            }
+        });
     }
 }

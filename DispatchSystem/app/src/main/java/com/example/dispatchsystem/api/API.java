@@ -12,16 +12,15 @@ import retrofit2.http.Query;
 
 
 public interface API {
-    @POST("arduinoData")
-    Call<ResponseBody> sendArduinoData (
-            @Body ArduinoData data
-    );
-
     @POST("login")
     Call<User> checkUser (
             @Body Credentials credentials
     );
 
+    @POST("getData")
+    Call<ResponseBody> arduinoData(
+            @Body ArduinoData arduinoData
+    );
 
     @POST("register")
     Call<ResponseBody> createUser(

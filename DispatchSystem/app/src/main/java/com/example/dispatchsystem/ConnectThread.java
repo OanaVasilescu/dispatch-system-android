@@ -41,10 +41,10 @@ public class ConnectThread extends Thread {
             Log.e(TAG, "I'm here . It tries");
             // Get a BluetoothSocket to connect with the given BluetoothDevice.
             // MY_UUID is the app's UUID string, also used in the server code.
-//            tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
+            tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
 
             // open API
-            tmp = device.createRfcommSocketToServiceRecord(BLUETOOTH_SPP);
+//            tmp = device.createRfcommSocketToServiceRecord(BLUETOOTH_SPP);
 //            // if failed: hidden API
 //            createMethod = device.getClass().getMethod("createInsecureRfcommSocket", new Class[] { int.class });
 //            tmp = (BluetoothSocket)createMethod.invoke(device, 1);
